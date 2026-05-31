@@ -1,0 +1,403 @@
+/* Base and Reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #000;
+  color: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  -webkit-font-smoothing: antialiased;
+}
+
+.mobile-container {
+  width: 100%;
+  max-width: 480px; /* Emulates mobile view */
+  background-color: #000;
+  min-height: 100vh;
+  padding: 20px;
+  position: relative;
+}
+
+/* Typography Overrides */
+h1, h2 {
+  font-weight: 200;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 1.1rem;
+  line-height: 1.4;
+  margin: 40px 0 30px;
+  font-weight: 300;
+}
+
+/* Header */
+.top-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin-bottom: 20px;
+  padding: 0 10px;
+}
+
+/* Hero Section */
+.hero-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 50px;
+}
+
+.hero-image-wrapper {
+  width: 100%;
+  height: 350px;
+  border-radius: 20px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-text {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.hero-text h1 {
+  font-size: 2.2rem;
+  line-height: 1.1;
+  margin-bottom: 15px;
+}
+
+.hero-text p {
+  font-size: 1rem;
+  font-weight: 300;
+  letter-spacing: 1px;
+  color: #ccc;
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+
+/* Founder Message */
+.founder-message {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 0.9rem;
+  color: #aaa;
+  line-height: 1.6;
+  font-weight: 300;
+  padding: 0 10px;
+}
+
+.founder-message p {
+  margin-bottom: 12px;
+}
+
+.founder-message p:last-child {
+  margin-bottom: 0;
+}
+
+/* Buttons */
+.primary-btn {
+  width: 100%;
+  background-color: #f2f2f2;
+  color: #000;
+  border: none;
+  border-radius: 32px;
+  padding: 18px 30px;
+  font-size: 1.15rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.primary-btn:active {
+  opacity: 0.8;
+}
+
+.secondary-margin {
+  margin-top: 30px;
+}
+
+/* Bento Grid */
+.bento-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 150px 150px;
+  gap: 15px;
+}
+
+.bento-item {
+  position: relative;
+  border-radius: 40px;
+  overflow: hidden;
+}
+
+.bento-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.6);
+}
+
+.bento-label {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1rem;
+  font-weight: 300;
+  letter-spacing: 0.5px;
+}
+
+.bento-large {
+  grid-row: 1 / span 2;
+  border-radius: 80px 40px 40px 80px;
+}
+
+.bento-small.top-right {
+  border-radius: 80px 80px 80px 0px;
+}
+
+.bento-small.bottom-right {
+  border-radius: 0px 80px 80px 80px;
+}
+
+/* Why Choose Us - Slider */
+.slider-wrapper {
+  width: 100%;
+  max-width: 400px; /* adjust as needed */
+  aspect-ratio: 9 / 16; /* vertical */
+  overflow: hidden;
+  border-radius: 12px;
+
+}
+
+.slider-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.slider-dots {
+  position: absolute;
+  bottom: 15px;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  background-color: rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+}
+
+.dot.active {
+  background-color: #fff;
+}
+
+/* Features List */
+.features-list {
+  list-style: none;
+  margin-bottom: 40px;
+}
+
+.features-title {
+  font-size: 28px;
+  font-weight: 200;
+  margin-bottom: 24px;
+  padding-top: 25px;
+  text-align: center;
+}
+
+.features-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  margin-bottom: 12px;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  font-weight: 300;
+}
+
+.circle-icon {
+  width: 14px;
+  height: 14px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  margin-top: 4px;
+  flex-shrink: 0;
+}
+
+/* 2x2 Photo Grid */
+.photo-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+
+.grid-img, .grid-video {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 15px;
+}
+
+/* Accordion with Smooth Animation */
+.accordion {
+  margin-top: 20px;
+}
+
+.accordion-item {
+  border-bottom: 1px solid #333;
+}
+
+.accordion-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+  cursor: pointer;
+  font-weight: 300;
+  font-size: 1.05rem;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.arrow-icon {
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+}
+
+.arrow-icon.rotated {
+  transform: rotate(180deg);
+}
+
+/* Magic CSS Grid Trick for Smooth Accordion */
+.accordion-content-wrapper {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.3s ease;
+}
+
+.accordion-content-wrapper.open {
+  grid-template-rows: 1fr;
+}
+
+.accordion-content {
+  overflow: hidden;
+}
+
+.accordion-inner-text {
+  padding-bottom: 20px;
+  font-size: 0.9rem;
+  color: #aaa;
+  font-weight: 300;
+  line-height: 1.6;
+}
+
+.accordion-inner-text p {
+  margin-bottom: 12px;
+}
+
+.accordion-inner-text p:last-child {
+  margin-bottom: 0;
+}
+
+.custom-list {
+  list-style: none;
+  margin-bottom: 15px;
+}
+
+.custom-list li {
+  margin-bottom: 8px;
+}
+
+.signature {
+  margin-top: 20px !important;
+  font-style: italic;
+  color: #fff;
+}
+
+/* Footer Section */
+.footer-section {
+  margin-top: 60px;
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.social-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.social-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  background-color: #fff;
+  border-radius: 20px;
+  text-decoration: none;
+  transition: transform 0.2s;
+}
+
+.social-btn:active {
+  transform: scale(0.95);
+}
+
+.instagram-btn-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.instagram-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 28px;
+
+  background: linear-gradient(
+    45deg,
+    #f09433,
+    #e6683c,
+    #dc2743,
+    #cc2366,
+    #bc1888
+  );
+
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 16px;
+  border-radius: 999px;
+
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 20px rgba(220, 39, 67, 0.25);
+}
+
+.instagram-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px rgba(220, 39, 67, 0.35);
+}
