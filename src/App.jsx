@@ -142,7 +142,7 @@ const App = () => {
 </div>
 
 <div className="features-section">
-  <h2 className="features-title">Кому подходит уход</h2>
+  <h2 className="section-title">Кому подходит уход</h2>
 
   <ul className="features-list">
     <li>
