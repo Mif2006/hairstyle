@@ -5,13 +5,6 @@
   padding: 0;
 }
 
-html, body {
-  /* CRITICAL FIX: Forces scrollbar to always take up space so content doesn't jump/get covered */
-  overflow-y: scroll; 
-  /* Prevents horizontal scroll bounce on iOS/Android */
-  overscroll-behavior: none;
-}
-
 body {
   background-color: #000;
   color: #fff;
@@ -19,6 +12,8 @@ body {
   display: flex;
   justify-content: center;
   -webkit-font-smoothing: antialiased;
+  /* Prevent horizontal scroll on the body level */
+  overflow-x: hidden; 
   width: 100%;
 }
 
@@ -28,13 +23,11 @@ body {
   background-color: #000;
   min-height: 100vh;
   
-  /* CRITICAL FIX: Added padding-left/right to account for safe areas (notches/gestures) */
-  padding: 20px;
-  padding-left: max(20px, env(safe-area-inset-left));
-  padding-right: max(20px, env(safe-area-inset-right));
+  /* CHANGED: Increased side padding to 24px to avoid curved edge cutoff on phones like Xiaomi/Samsung */
+  padding: 20px 24px; 
   
   position: relative;
-  overflow-x: hidden; /* Prevents horizontal scroll */
+  overflow-x: hidden;
 }
 
 /* Typography Overrides */
@@ -42,8 +35,10 @@ h1, h2 {
   font-weight: 200;
   letter-spacing: 1px;
   text-transform: uppercase;
-  /* Ensures text doesn't get clipped by overflow */
-  word-wrap: break-word; 
+  /* CHANGED: Ensure long words wrap instead of cutting off */
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
 }
 
 .section-title {
@@ -52,7 +47,7 @@ h1, h2 {
   line-height: 1.4;
   margin: 40px 0 30px;
   font-weight: 300;
-  /* Add slight padding to ensure titles don't touch edges on tiny screens */
+  /* Ensure title doesn't touch edges */
   padding: 0 5px; 
 }
 
@@ -64,7 +59,8 @@ h1, h2 {
   font-weight: 700;
   letter-spacing: 1px;
   margin-bottom: 20px;
-  padding: 0 10px;
+  /* Removed padding here because container already has padding */
+  padding: 0; 
 }
 
 /* Hero Section */
@@ -73,6 +69,7 @@ h1, h2 {
   flex-direction: column;
   align-items: center;
   margin-bottom: 50px;
+  width: 100%; /* Ensure it takes full available width */
 }
 
 .hero-image-wrapper {
@@ -82,8 +79,6 @@ h1, h2 {
   border-radius: 20px;
   overflow: hidden;
   margin-bottom: 20px;
-  /* Fix for image bleeding on some Android GPUs */
-  transform: translateZ(0); 
 }
 
 .hero-image {
@@ -95,15 +90,14 @@ h1, h2 {
 .hero-text {
   text-align: center;
   margin-bottom: 20px;
-  width: 100%; /* Ensure container takes full width */
+  width: 100%;
 }
 
 .hero-text h1 {
   font-size: 2.2rem;
   line-height: 1.1;
   margin-bottom: 15px;
-  /* Fix for text clipping on left edge */
-  padding: 0 5px;
+  /* Reduced letter spacing slightly on small screens if needed, but keeping design intact */
 }
 
 .hero-text p {
@@ -123,7 +117,8 @@ h1, h2 {
   color: #aaa;
   line-height: 1.6;
   font-weight: 300;
-  padding: 0 10px;
+  /* Removed internal padding as container handles it now */
+  padding: 0; 
 }
 
 .founder-message p {
@@ -146,6 +141,8 @@ h1, h2 {
   font-weight: 700;
   cursor: pointer;
   transition: opacity 0.2s;
+  /* Ensure button doesn't overflow */
+  max-width: 100%;
 }
 
 .primary-btn:active {
@@ -170,8 +167,8 @@ h1, h2 {
   border-radius: 40px;
   overflow: hidden;
   aspect-ratio: 1/1; 
-  /* Fix for image bleeding */
-  transform: translateZ(0);
+  /* Ensure images inside don't stretch grid */
+  min-width: 0; 
 }
 
 .bento-large {
@@ -185,7 +182,7 @@ h1, h2 {
   height: 100%;
   object-fit: cover;
   filter: brightness(0.8);
-  display: block; /* Removes tiny bottom gap */
+  display: block; /* Removes tiny bottom gap in some browsers */
 }
 
 .bento-label {
@@ -249,6 +246,7 @@ h1, h2 {
 .features-list {
   list-style: none;
   margin-bottom: 40px;
+  padding: 0 5px; /* Slight padding for safety */
 }
 
 .features-title {
@@ -313,12 +311,14 @@ h1, h2 {
   font-weight: 300;
   font-size: 1.05rem;
   -webkit-tap-highlight-color: transparent;
+  /* Ensure text wraps if question is long */
+  padding-right: 10px; 
 }
 
 .arrow-icon {
   transition: transform 0.3s ease;
   flex-shrink: 0;
-  margin-left: 10px; /* Ensure arrow doesn't touch text */
+  margin-left: 10px; /* Space between text and arrow */
 }
 
 .arrow-icon.rotated {
@@ -403,11 +403,13 @@ h1, h2 {
   display: flex;
   justify-content: center;
   margin-top: 30px;
+  width: 100%;
 }
 
 .instagram-btn {
   display: inline-flex;
   align-items: center;
+  justify-content: center; /* Center content inside button */
   gap: 10px;
   padding: 14px 28px;
   background: linear-gradient(
@@ -425,6 +427,7 @@ h1, h2 {
   border-radius: 999px;
   transition: all 0.3s ease;
   box-shadow: 0 8px 20px rgba(220, 39, 67, 0.25);
+  max-width: 100%; /* Prevent button from being wider than screen */
 }
 
 .instagram-btn:hover {
@@ -433,10 +436,8 @@ h1, h2 {
 }
 
 .awards-section {
-  padding: 48px 20px;
-  /* Ensure padding respects safe areas here too */
-  padding-left: max(20px, env(safe-area-inset-left));
-  padding-right: max(20px, env(safe-area-inset-right));
+  padding: 48px 0; /* Removed side padding, container handles it */
+  width: 100%;
 }
 
 .awards-hero-wrapper {
@@ -456,6 +457,7 @@ h1, h2 {
 
 .awards-content {
   margin-top: 20px;
+  padding: 0 5px;
 }
 
 .awards-content p {
@@ -471,9 +473,10 @@ h1, h2 {
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   padding-bottom: 6px;
+  /* Hide scrollbar */
   -ms-overflow-style: none;  
   scrollbar-width: none;  
-  /* Ensure carousel doesn't touch edges */
+  /* Add padding to sides so first/last items aren't stuck to edge */
   padding-left: 5px;
   padding-right: 5px;
 }
