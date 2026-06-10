@@ -21,6 +21,8 @@ body {
   min-height: 100vh;
   padding: 20px;
   position: relative;
+  /* Ensures container doesn't overflow horizontally on small screens */
+  overflow-x: hidden; 
 }
 
 /* Typography Overrides */
@@ -59,7 +61,9 @@ h1, h2 {
 
 .hero-image-wrapper {
   width: 100%;
-  height: 350px;
+  /* CHANGED: Used aspect-ratio instead of fixed height to prevent squashing on small screens */
+  aspect-ratio: 4/5; 
+  max-height: 450px; /* Cap height on larger phones */
   border-radius: 20px;
   overflow: hidden;
   margin-bottom: 20px;
@@ -136,7 +140,8 @@ h1, h2 {
 .bento-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 150px 150px;
+  /* CHANGED: Removed fixed row height. Used aspect-ratio for responsiveness */
+  grid-template-rows: auto; 
   gap: 15px;
 }
 
@@ -144,6 +149,15 @@ h1, h2 {
   position: relative;
   border-radius: 40px;
   overflow: hidden;
+  /* Ensure items maintain shape */
+  aspect-ratio: 1/1; 
+}
+
+/* Specific adjustments for the large item to span correctly */
+.bento-large {
+  grid-row: 1 / span 2;
+  border-radius: 80px 40px 40px 80px;
+  aspect-ratio: auto; /* Let it stretch based on the two rows next to it */
 }
 
 .bento-item img {
@@ -163,11 +177,6 @@ h1, h2 {
   letter-spacing: 0.5px;
 }
 
-.bento-large {
-  grid-row: 1 / span 2;
-  border-radius: 80px 40px 40px 80px;
-}
-
 .bento-small.top-right {
   border-radius: 80px 80px 80px 0px;
 }
@@ -179,11 +188,13 @@ h1, h2 {
 /* Why Choose Us - Slider */
 .slider-wrapper {
   width: 100%;
-  max-width: 400px; /* adjust as needed */
-  aspect-ratio: 9 / 16; /* vertical */
+  max-width: 400px;
+  /* CHANGED: Removed fixed aspect-ratio to let video dictate height or use standard mobile ratio */
+  aspect-ratio: 9/16; 
   overflow: hidden;
   border-radius: 12px;
-
+  margin: 0 auto; /* Center it */
+  background: #111; /* Fallback color */
 }
 
 .slider-image {
@@ -254,12 +265,13 @@ h1, h2 {
   gap: 15px;
 }
 
-
 .grid-img, .grid-video {
   width: 100%;
-  height: 250px;
+  /* CHANGED: Use aspect-ratio instead of fixed height */
+  aspect-ratio: 3/4; 
   object-fit: cover;
   border-radius: 15px;
+  background: #111; /* Prevent layout shift while loading */
 }
 
 /* Accordion with Smooth Animation */
@@ -377,7 +389,6 @@ h1, h2 {
   align-items: center;
   gap: 10px;
   padding: 14px 28px;
-
   background: linear-gradient(
     45deg,
     #f09433,
@@ -386,13 +397,11 @@ h1, h2 {
     #cc2366,
     #bc1888
   );
-
   color: white;
   text-decoration: none;
   font-weight: 600;
   font-size: 16px;
   border-radius: 999px;
-
   transition: all 0.3s ease;
   box-shadow: 0 8px 20px rgba(220, 39, 67, 0.25);
 }
@@ -403,88 +412,58 @@ h1, h2 {
 }
 
 .awards-section {
-
   padding: 48px 20px;
-  
-  }
-  
-  .awards-hero-wrapper {
-  
+}
+
+.awards-hero-wrapper {
   width: 100%;
-  
   border-radius: 28px;
-  
   overflow: hidden;
-  
   margin-top: 24px;
-  
-  }
-  
-  .awards-hero-image {
-    width: 100%;
-    height: 70vh;
-    object-fit: cover;
-    display: block;
-  }
-  
-  .awards-content {
-  
-  margin-top: 20px;
-  
-  }
-  
-  .awards-content p {
-  
-  color: #e7e7e7;
-  
-  font-size: 16px;
-  
-  line-height: 1.8;
-  
-  }
-  
-  .awards-carousel {
-  
-  margin-top: 24px;
-  
-  display: flex;
-  
-  gap: 16px;
-  
-  overflow-x: auto;
-  
-  scroll-snap-type: x mandatory;
-  
-  padding-bottom: 6px;
-  
-  }
-  
-  .awards-carousel::-webkit-scrollbar {
-  
-  height: 6px;
-  
-  }
-  
-  .awards-carousel::-webkit-scrollbar-thumb {
-  
-  background: rgba(255,255,255,0.25);
-  
-  border-radius: 999px;
-  
-  }
-  
-  .award-slide {
-  
-  width: 240px;
-  
-  flex-shrink: 0;
-  
-  border-radius: 20px;
-  
+}
+
+.awards-hero-image {
+  width: 100%;
+  /* CHANGED: Responsive height */
+  height: auto;
+  max-height: 70vh;
   object-fit: cover;
-  
+  display: block;
+}
+
+.awards-content {
+  margin-top: 20px;
+}
+
+.awards-content p {
+  color: #e7e7e7;
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+.awards-carousel {
+  margin-top: 24px;
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 6px;
+  /* Hide scrollbar for cleaner look but keep functionality */
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.awards-carousel::-webkit-scrollbar {
+  display: none;
+}
+
+.award-slide {
+  width: 240px;
+  flex-shrink: 0;
+  border-radius: 20px;
+  object-fit: cover;
   scroll-snap-align: start;
-  
   box-shadow: 0 10px 24px rgba(0,0,0,0.25);
-  
-  }
+  /* Ensure images don't stretch weirdly */
+  aspect-ratio: 3/4; 
+}
