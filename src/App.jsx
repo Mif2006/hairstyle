@@ -210,7 +210,8 @@ const App = () => {
 
       <section className="awards-section">
 
-<h2 className="section-title">🏆 Годы опыта. Результаты. Победы.</h2>
+<h2 className="section-title">👑 Красота — это больше, чем профессия</h2>
+
 
 <div className="awards-hero-wrapper">
 
@@ -222,12 +223,13 @@ const App = () => {
 
 <p>
 
-👑 Красота — это больше, чем профессия
 Для Бэллы красота — не просто работа, а часть жизни.
 Победа в конкурсе красоты стала ещё одним подтверждением того, что уверенность, любовь к себе и внимание к деталям всегда заметны окружающим.
 Те же принципы она вкладывает в свою работу и в создание каждого продукта.
 
 </p>
+
+<h2 className="section-title">🏆 Годы опыта. Результаты. Победы.</h2>
 
 </div>
 
@@ -235,14 +237,14 @@ const App = () => {
 
 
 <img src="awcarousel2.JPG" alt="Award 2" className="award-slide" />
-<img src="awcarousel1.JPG" alt="Award 1" className="award-slide" />
-
 
 {/* <img src="/awcarousel3.JPG" alt="Award 3" className="award-slide" /> */}
 
 <img src="awcarousel5.JPG" alt="Award 4" className="award-slide" />
+
 <img src="awcarousel4.JPG" alt="Award 4" className="award-slide" />
 <img src="awcarousel6.JPG" alt="Award 4" className="award-slide" />
+<img src="awcarousel1.JPG" alt="Award 1" className="award-slide" />
 <img src="awcarousel7.JPG" alt="Award 4" className="award-slide" />
 
 </div>
