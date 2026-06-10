@@ -5,6 +5,13 @@
   padding: 0;
 }
 
+html, body {
+  /* CRITICAL FIX: Forces scrollbar to always take up space so content doesn't jump/get covered */
+  overflow-y: scroll; 
+  /* Prevents horizontal scroll bounce on iOS/Android */
+  overscroll-behavior: none;
+}
+
 body {
   background-color: #000;
   color: #fff;
@@ -12,17 +19,22 @@ body {
   display: flex;
   justify-content: center;
   -webkit-font-smoothing: antialiased;
+  width: 100%;
 }
 
 .mobile-container {
   width: 100%;
-  max-width: 480px; /* Emulates mobile view */
+  max-width: 480px; 
   background-color: #000;
   min-height: 100vh;
+  
+  /* CRITICAL FIX: Added padding-left/right to account for safe areas (notches/gestures) */
   padding: 20px;
+  padding-left: max(20px, env(safe-area-inset-left));
+  padding-right: max(20px, env(safe-area-inset-right));
+  
   position: relative;
-  /* Ensures container doesn't overflow horizontally on small screens */
-  overflow-x: hidden; 
+  overflow-x: hidden; /* Prevents horizontal scroll */
 }
 
 /* Typography Overrides */
@@ -30,6 +42,8 @@ h1, h2 {
   font-weight: 200;
   letter-spacing: 1px;
   text-transform: uppercase;
+  /* Ensures text doesn't get clipped by overflow */
+  word-wrap: break-word; 
 }
 
 .section-title {
@@ -38,6 +52,8 @@ h1, h2 {
   line-height: 1.4;
   margin: 40px 0 30px;
   font-weight: 300;
+  /* Add slight padding to ensure titles don't touch edges on tiny screens */
+  padding: 0 5px; 
 }
 
 /* Header */
@@ -61,12 +77,13 @@ h1, h2 {
 
 .hero-image-wrapper {
   width: 100%;
-  /* CHANGED: Used aspect-ratio instead of fixed height to prevent squashing on small screens */
   aspect-ratio: 4/5; 
-  max-height: 450px; /* Cap height on larger phones */
+  max-height: 450px; 
   border-radius: 20px;
   overflow: hidden;
   margin-bottom: 20px;
+  /* Fix for image bleeding on some Android GPUs */
+  transform: translateZ(0); 
 }
 
 .hero-image {
@@ -78,12 +95,15 @@ h1, h2 {
 .hero-text {
   text-align: center;
   margin-bottom: 20px;
+  width: 100%; /* Ensure container takes full width */
 }
 
 .hero-text h1 {
   font-size: 2.2rem;
   line-height: 1.1;
   margin-bottom: 15px;
+  /* Fix for text clipping on left edge */
+  padding: 0 5px;
 }
 
 .hero-text p {
@@ -140,24 +160,24 @@ h1, h2 {
 .bento-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  /* CHANGED: Removed fixed row height. Used aspect-ratio for responsiveness */
   grid-template-rows: auto; 
   gap: 15px;
+  width: 100%;
 }
 
 .bento-item {
   position: relative;
   border-radius: 40px;
   overflow: hidden;
-  /* Ensure items maintain shape */
   aspect-ratio: 1/1; 
+  /* Fix for image bleeding */
+  transform: translateZ(0);
 }
 
-/* Specific adjustments for the large item to span correctly */
 .bento-large {
   grid-row: 1 / span 2;
   border-radius: 80px 40px 40px 80px;
-  aspect-ratio: auto; /* Let it stretch based on the two rows next to it */
+  aspect-ratio: auto; 
 }
 
 .bento-item img {
@@ -165,6 +185,7 @@ h1, h2 {
   height: 100%;
   object-fit: cover;
   filter: brightness(0.8);
+  display: block; /* Removes tiny bottom gap */
 }
 
 .bento-label {
@@ -189,12 +210,11 @@ h1, h2 {
 .slider-wrapper {
   width: 100%;
   max-width: 400px;
-  /* CHANGED: Removed fixed aspect-ratio to let video dictate height or use standard mobile ratio */
   aspect-ratio: 9/16; 
   overflow: hidden;
   border-radius: 12px;
-  margin: 0 auto; /* Center it */
-  background: #111; /* Fallback color */
+  margin: 0 auto; 
+  background: #111; 
 }
 
 .slider-image {
@@ -263,15 +283,16 @@ h1, h2 {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 15px;
+  width: 100%;
 }
 
 .grid-img, .grid-video {
   width: 100%;
-  /* CHANGED: Use aspect-ratio instead of fixed height */
   aspect-ratio: 3/4; 
   object-fit: cover;
   border-radius: 15px;
-  background: #111; /* Prevent layout shift while loading */
+  background: #111; 
+  display: block;
 }
 
 /* Accordion with Smooth Animation */
@@ -297,13 +318,13 @@ h1, h2 {
 .arrow-icon {
   transition: transform 0.3s ease;
   flex-shrink: 0;
+  margin-left: 10px; /* Ensure arrow doesn't touch text */
 }
 
 .arrow-icon.rotated {
   transform: rotate(180deg);
 }
 
-/* Magic CSS Grid Trick for Smooth Accordion */
 .accordion-content-wrapper {
   display: grid;
   grid-template-rows: 0fr;
@@ -413,6 +434,9 @@ h1, h2 {
 
 .awards-section {
   padding: 48px 20px;
+  /* Ensure padding respects safe areas here too */
+  padding-left: max(20px, env(safe-area-inset-left));
+  padding-right: max(20px, env(safe-area-inset-right));
 }
 
 .awards-hero-wrapper {
@@ -424,7 +448,6 @@ h1, h2 {
 
 .awards-hero-image {
   width: 100%;
-  /* CHANGED: Responsive height */
   height: auto;
   max-height: 70vh;
   object-fit: cover;
@@ -448,9 +471,11 @@ h1, h2 {
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   padding-bottom: 6px;
-  /* Hide scrollbar for cleaner look but keep functionality */
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none;  
+  scrollbar-width: none;  
+  /* Ensure carousel doesn't touch edges */
+  padding-left: 5px;
+  padding-right: 5px;
 }
 
 .awards-carousel::-webkit-scrollbar {
@@ -464,6 +489,5 @@ h1, h2 {
   object-fit: cover;
   scroll-snap-align: start;
   box-shadow: 0 10px 24px rgba(0,0,0,0.25);
-  /* Ensure images don't stretch weirdly */
   aspect-ratio: 3/4; 
 }
