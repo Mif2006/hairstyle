@@ -5,43 +5,41 @@
   padding: 0;
 }
 
-html, body {
+html {
   width: 100%;
-  overflow-x: hidden; /* Prevents the whole page from scrolling horizontally */
+  overflow-x: hidden;
 }
 
 body {
   background-color: #000;
   color: #fff;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  display: flex;
-  justify-content: center;
   -webkit-font-smoothing: antialiased;
+  width: 100%;
+  min-height: 100vh;
+  /* REMOVED: display: flex; justify-content: center; — this causes Android offset bug */
 }
 
 .mobile-container {
   width: 100%;
-  max-width: 480px; 
+  max-width: 480px;
   background-color: #000;
   min-height: 100vh;
   padding: 20px;
   position: relative;
+  margin: 0 auto; /* ADDED: This centers the container reliably on all devices */
 }
 
 /* Typography Overrides */
 h1, h2 {
   font-weight: 200;
-  letter-spacing: 0.5px; /* Slightly reduced to save horizontal space */
+  letter-spacing: 1px;
   text-transform: uppercase;
-  max-width: 100%;
-  overflow-wrap: break-word;
-  word-wrap: break-word;
 }
 
 .section-title {
   text-align: center;
-  /* FLUID TYPOGRAPHY: Automatically scales down on smaller screens to prevent cutoff */
-  font-size: clamp(1rem, 4vw, 1.1rem); 
+  font-size: 1.1rem;
   line-height: 1.4;
   margin: 40px 0 30px;
   font-weight: 300;
@@ -68,8 +66,7 @@ h1, h2 {
 
 .hero-image-wrapper {
   width: 100%;
-  aspect-ratio: 4/5; 
-  max-height: 450px; 
+  height: 350px;
   border-radius: 20px;
   overflow: hidden;
   margin-bottom: 20px;
@@ -79,18 +76,15 @@ h1, h2 {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  display: block;
 }
 
 .hero-text {
   text-align: center;
   margin-bottom: 20px;
-  width: 100%;
 }
 
 .hero-text h1 {
-  /* FLUID TYPOGRAPHY: Shrinks to fit the screen so the "К" never gets cut off */
-  font-size: clamp(1.8rem, 7vw, 2.2rem); 
+  font-size: 2.2rem;
   line-height: 1.1;
   margin-bottom: 15px;
 }
@@ -149,24 +143,14 @@ h1, h2 {
 .bento-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: auto; 
+  grid-template-rows: 150px 150px;
   gap: 15px;
-  width: 100%;
 }
 
 .bento-item {
   position: relative;
-  /* REDUCED RADIUS: Prevents the corners from eating the image on small screens */
-  border-radius: 20px; 
+  border-radius: 40px;
   overflow: hidden;
-  aspect-ratio: 1/1; 
-}
-
-.bento-large {
-  grid-row: 1 / span 2;
-  /* REDUCED ASYMMETRIC RADIUS: Keeps the shape but stops it from clipping the photo */
-  border-radius: 35px 20px 20px 35px;
-  aspect-ratio: auto; 
 }
 
 .bento-item img {
@@ -174,7 +158,6 @@ h1, h2 {
   height: 100%;
   object-fit: cover;
   filter: brightness(0.8);
-  display: block; 
 }
 
 .bento-label {
@@ -187,23 +170,27 @@ h1, h2 {
   letter-spacing: 0.5px;
 }
 
+.bento-large {
+  grid-row: 1 / span 2;
+  border-radius: 80px 40px 40px 80px;
+}
+
 .bento-small.top-right {
-  border-radius: 35px 35px 35px 0px;
+  border-radius: 80px 80px 80px 0px;
 }
 
 .bento-small.bottom-right {
-  border-radius: 0px 35px 35px 35px;
+  border-radius: 0px 80px 80px 80px;
 }
 
 /* Why Choose Us - Slider */
 .slider-wrapper {
   width: 100%;
   max-width: 400px;
-  aspect-ratio: 9/16; 
+  aspect-ratio: 9 / 16;
   overflow: hidden;
   border-radius: 12px;
-  margin: 0 auto; 
-  background: #111; 
+  margin: 0 auto;
 }
 
 .slider-image {
@@ -241,7 +228,7 @@ h1, h2 {
 }
 
 .features-title {
-  font-size: clamp(1.5rem, 6vw, 28px); /* Fluid typography */
+  font-size: 28px;
   font-weight: 200;
   margin-bottom: 24px;
   padding-top: 25px;
@@ -272,16 +259,13 @@ h1, h2 {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 15px;
-  width: 100%;
 }
 
 .grid-img, .grid-video {
   width: 100%;
-  aspect-ratio: 3/4; 
+  height: 250px;
   object-fit: cover;
   border-radius: 15px;
-  background: #111; 
-  display: block;
 }
 
 /* Accordion with Smooth Animation */
@@ -307,7 +291,6 @@ h1, h2 {
 .arrow-icon {
   transition: transform 0.3s ease;
   flex-shrink: 0;
-  margin-left: 10px; 
 }
 
 .arrow-icon.rotated {
@@ -422,7 +405,7 @@ h1, h2 {
 }
 
 .awards-section {
-  padding: 48px 0; /* Removed horizontal padding here, the main container handles it */
+  padding: 48px 20px;
 }
 
 .awards-hero-wrapper {
@@ -434,8 +417,7 @@ h1, h2 {
 
 .awards-hero-image {
   width: 100%;
-  height: auto;
-  max-height: 70vh;
+  height: 70vh;
   object-fit: cover;
   display: block;
 }
@@ -457,20 +439,22 @@ h1, h2 {
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   padding-bottom: 6px;
-  -ms-overflow-style: none;  
-  scrollbar-width: none;  
 }
 
 .awards-carousel::-webkit-scrollbar {
-  display: none;
+  height: 6px;
+}
+
+.awards-carousel::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.25);
+  border-radius: 999px;
 }
 
 .award-slide {
-  width: 220px; /* Slightly reduced to ensure it fits nicely on small screens */
+  width: 240px;
   flex-shrink: 0;
   border-radius: 20px;
   object-fit: cover;
   scroll-snap-align: start;
   box-shadow: 0 10px 24px rgba(0,0,0,0.25);
-  aspect-ratio: 3/4; 
 }
