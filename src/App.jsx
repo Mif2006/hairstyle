@@ -208,6 +208,40 @@ const App = () => {
 </div>
       </section>
 
+      <section className="awards-section">
+
+<h2 className="section-title">🏆 Годы опыта. Результаты. Победы.</h2>
+
+<div className="awards-hero-wrapper">
+
+<img src="/Awardsprimary.JPG" alt="Awards Hero" className="awards-hero-image" />
+
+</div>
+
+<div className="awards-content">
+
+<p>
+
+За годы работы мои методики восстановления волос и индивидуальный подход получили признание клиентов и профессионального сообщества. Эти награды отражают не только качество процедур, но и доверие женщин, которые выбирают заботу о своих волосах каждый день.
+
+</p>
+
+</div>
+
+<div className="awards-carousel">
+
+<img src="awcarousel1.JPG" alt="Award 1" className="award-slide" />
+
+<img src="awcarousel2.JPG" alt="Award 2" className="award-slide" />
+
+<img src="/awcarousel3.JPG" alt="Award 3" className="award-slide" />
+
+<img src="awcarousel4.JPG" alt="Award 4" className="award-slide" />
+
+</div>
+
+</section>
+
       {/* Philosophy / Accordion Section */}
       <section className="philosophy-section">
         <h2 className="section-title">НАША ФИЛОСОФИЯ УХОДА<br />ЗА ВОЛОСАМИ</h2>
@@ -240,9 +274,11 @@ const App = () => {
         </div>
       </section>
 
+      
+
       {/* Footer / Socials */}
       <footer className="footer-section">
-  <h2 className="section-title">Связаться с Нами</h2>
+  <h2 className="section-title">Связаться со мной</h2>
 
   <div className="social-buttons">
     <a

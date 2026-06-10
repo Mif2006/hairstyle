@@ -401,3 +401,90 @@ h1, h2 {
   transform: translateY(-2px);
   box-shadow: 0 12px 24px rgba(220, 39, 67, 0.35);
 }
+
+.awards-section {
+
+  padding: 48px 20px;
+  
+  }
+  
+  .awards-hero-wrapper {
+  
+  width: 100%;
+  
+  border-radius: 28px;
+  
+  overflow: hidden;
+  
+  margin-top: 24px;
+  
+  }
+  
+  .awards-hero-image {
+    width: 100%;
+    height: 70vh;
+    object-fit: cover;
+    display: block;
+  }
+  
+  .awards-content {
+  
+  margin-top: 20px;
+  
+  }
+  
+  .awards-content p {
+  
+  color: #e7e7e7;
+  
+  font-size: 16px;
+  
+  line-height: 1.8;
+  
+  }
+  
+  .awards-carousel {
+  
+  margin-top: 24px;
+  
+  display: flex;
+  
+  gap: 16px;
+  
+  overflow-x: auto;
+  
+  scroll-snap-type: x mandatory;
+  
+  padding-bottom: 6px;
+  
+  }
+  
+  .awards-carousel::-webkit-scrollbar {
+  
+  height: 6px;
+  
+  }
+  
+  .awards-carousel::-webkit-scrollbar-thumb {
+  
+  background: rgba(255,255,255,0.25);
+  
+  border-radius: 999px;
+  
+  }
+  
+  .award-slide {
+  
+  width: 240px;
+  
+  flex-shrink: 0;
+  
+  border-radius: 20px;
+  
+  object-fit: cover;
+  
+  scroll-snap-align: start;
+  
+  box-shadow: 0 10px 24px rgba(0,0,0,0.25);
+  
+  }
